@@ -1,70 +1,37 @@
-# Getting Started with Create React App
+# Real-time WiFi Sensing and Yoga Activity Recognition
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React-based frontend system for visualizing **52-channel Wi-Fi CSI (Channel State Information) signals** in real time and synchronizing them with yoga activity videos. The app parses raw CSV sensor data, processes it in a sliding window, and maps activities to videos for activity recognition research.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Features
+- 📂 **CSV Upload & Parsing** – Uses **PapaParse** to parse large Wi-Fi CSI CSV files efficiently (streaming + worker threads).  
+- 📊 **Real-time Visualization** – Displays 52-channel signals with **Chart.js** (via `react-chartjs-2`).  
+- 🪄 **Sliding Window (N=50)** – Maintains only the latest 50 data points → prevents memory bloat and ensures smooth charts.  
+- 🎥 **Activity Mapping** – Last column in CSV is the activity label → maps to synchronized yoga videos.  
+- ⚡ **Performance Optimizations** – Data validation, async parsing, and React hooks (`useState`, `useEffect`, `useMemo`) to reduce re-renders.  
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🛠️ Tech Stack
+- **React.js** – UI framework  
+- **PapaParse** – CSV parsing in-browser  
+- **Chart.js + react-chartjs-2** – Real-time line charts  
+- **React Hooks** – `useState`, `useEffect`, `useRef`, `useMemo`  
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 📂 Workflow
+1. **Upload CSV** → Parse rows with PapaParse (53 columns: 52 channels + 1 activity label).  
+2. **Validate Data** → Keep only rows with exactly 53 numeric values.  
+3. **Update State in Real Time** → Add new values every 50ms (20Hz), keep last 50 points.  
+4. **Chart Update** → Render smooth scrolling graph for 52 channels.  
+5. **Activity Mapping** → Switch synchronized yoga activity video based on label.  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## ✅ Summary
+This project demonstrates **real-time data visualization**, **signal processing**, and **human activity recognition** concepts using React. It is optimized for handling **high-frequency, multi-channel Wi-Fi CSI signals** while staying responsive in the browser.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
